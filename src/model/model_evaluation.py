@@ -9,7 +9,7 @@ from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_sc
 from src.logger import logging
 
 dagshub.init(repo_owner='Lakshya0707', repo_name='mlops-practice', mlflow=True)
-mlflow.set_experiment('iris-experiment')
+mlflow.set_experiment('iris-experiment-v2')
 
 def load_model(path='models/model.pkl'):
     with open(path, 'rb') as f:

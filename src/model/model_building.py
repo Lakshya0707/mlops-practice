@@ -1,5 +1,6 @@
 import os
 import pickle
+import yaml
 import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 from src.logger import logging
@@ -7,9 +8,15 @@ from src.logger import logging
 def load_data(path: str) -> pd.DataFrame:
     return pd.read_csv(path)
 
-def train_model(X, y):
+def load_params(path='params.yaml'):
+    with open(path) as f:
+        return yaml.safe_load(f)['model_building']
+
+def train_model(X, y,params):
     try:
-        model = RandomForestClassifier(n_estimators=100, max_depth=5, random_state=42)
+        model = RandomForestClassifier(n_estimators=params['n_estimators'],
+                                        max_depth= params['max_depth'],
+                                        random_state= params['random_state'])
         model.fit(X, y)
         logging.info('model trained')
         return model
@@ -25,9 +32,10 @@ def save_model(model, path='models/model.pkl'):
 
 def main():
     try:
+        params = load_params()
         train = load_data('./data/interim/train_feature_engineering.csv')
         X_train, y_train = train.drop(columns=['Species']), train['Species']
-        model = train_model(X_train, y_train)
+        model = train_model(X_train, y_train,params)
         save_model(model)
     except Exception as e:
         logging.error('model building failed: %s', e)

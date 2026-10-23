@@ -6,6 +6,6 @@ feature_engineering:
   max_features: 50
 
 model_building:
-  n_estimators: 5
-  max_depth: 20
+  n_estimators: 20
+  max_depth: 50
   random_state: 42
