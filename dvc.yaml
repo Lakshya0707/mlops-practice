@@ -1,0 +1,57 @@
+stages:
+  data_ingestion:
+    cmd: python -m src.data.data_ingestion
+    deps:
+      - src/data/data_ingestion.py
+    params:
+      - data_ingestion.test_size
+    outs:
+      - data/raw
+
+  data_preprocessing:
+    cmd: python -m src.data.data_preprocessing
+    deps:
+      - src/data/data_preprocessing.py
+      - data/raw
+    outs:
+      - data/processed
+      - artifacts/scaler.pkl
+
+  feature_engineering:
+    cmd: python -m src.features.feature_engineering
+    deps:
+      - src/features/feature_engineering.py
+      - data/processed
+    outs:
+      - data/interim
+
+  model_building:
+    cmd: python -m src.model.model_building
+    deps:
+      - src/model/model_building.py
+      - data/interim
+      - artifacts/scaler.pkl
+    params:
+      - model_building.n_estimators
+      - model_building.max_depth
+      - model_building.random_state
+    outs:
+      - models/model.pkl
+
+  model_evaluation:
+    cmd: python -m src.model.model_evaluation
+    deps:
+      - src/model/model_evaluation.py
+      - models/model.pkl
+      - data/interim
+    metrics:
+      - reports/metrics.json:
+          cache: false
+    outs:
+      - reports/experiment_info.json
+
+  model_registry:
+    cmd: python -m src.model.model_registry
+    deps:
+      - src/model/model_registry.py
+      - reports/experiment_info.json
