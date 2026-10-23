@@ -48,7 +48,7 @@ def data_preprocessing(df: pd.DataFrame)-> pd.DataFrame:
     try:
         logging.info('encoding target column.')
         le= LabelEncoder()
-        final_df = df.copy()
+        final_df = df.drop(columns=['Id'], errors='ignore').copy()
         final_df['Species'] = le.fit_transform(df['Species'])
         return final_df
     except KeyError as e:
@@ -63,9 +63,9 @@ def save_data(train_data: pd.DataFrame, test_data: pd.DataFrame, data_path: str)
     try:
         raw_data_path = os.path.join(data_path,'raw')
         os.makedirs(raw_data_path,exist_ok= True)
-        train_data.tocsv(os.path.join(raw_data_path,'train.csv'),index= False)
-        test_data.tocsv(os.path.join(raw_data_path,'test.csv'),index= False)
-        logging.info('train and test data save to &s',raw_data_path)
+        train_data.to_csv(os.path.join(raw_data_path,'train.csv'),index= False)
+        test_data.to_csv(os.path.join(raw_data_path,'test.csv'),index= False)
+        logging.info('train and test data save to %s',raw_data_path)
 
     except Exception as e:
         logging.error('Unexcepted error occurred while saving the data %s',e)
@@ -74,12 +74,12 @@ def save_data(train_data: pd.DataFrame, test_data: pd.DataFrame, data_path: str)
 
 def main():
     try:
-        params = load_params(params_path='parmas.yaml')
+        params = load_params(params_path='params.yaml')
         test_size = params['data_ingestion']['test_size']
 
-        df = load_data(data_url='https://github.com/Lakshya0707/mlops-practice/blob/main/notebooks/data.csv')
+        df = load_data(data_url='https://raw.githubusercontent.com/Lakshya0707/mlops-practice/main/notebooks/Iris.csv')
 
-        final_df = data_preprocessing()
+        final_df = data_preprocessing(df)
         train_data,test_data = train_test_split(final_df, test_size=test_size,random_state= 42)
         save_data(train_data,test_data,data_path= './data')
     
