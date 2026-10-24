@@ -48,13 +48,13 @@ stages:
       nfiles: 2
     - path: src/features/feature_engineering.py
       hash: md5
-      md5: b2d1e947a8a2e5691db2df763ca732e7
-      size: 1300
+      md5: 85a57f9d4b9e80819fcc96acf5829837
+      size: 1176
     outs:
     - path: data/interim
       hash: md5
-      md5: 7d127e2cbca3ea90380cc8ad94e81981.dir
-      size: 10617
+      md5: ffa0579552bb620b495db1f3810065a9.dir
+      size: 6167
       nfiles: 2
   model_building:
     cmd: python -m src.model.model_building
@@ -65,8 +65,8 @@ stages:
       size: 1079
     - path: data/interim
       hash: md5
-      md5: 7d127e2cbca3ea90380cc8ad94e81981.dir
-      size: 10617
+      md5: ffa0579552bb620b495db1f3810065a9.dir
+      size: 6167
       nfiles: 2
     - path: src/model/model_building.py
       hash: md5
@@ -80,20 +80,20 @@ stages:
     outs:
     - path: models/model.pkl
       hash: md5
-      md5: 78310d92c4172b94b19fde144de0fd66
-      size: 34522
+      md5: 73421c36fd8b9b450dab68bcc41ed203
+      size: 31515
   model_evaluation:
     cmd: python -m src.model.model_evaluation
     deps:
     - path: data/interim
       hash: md5
-      md5: 7d127e2cbca3ea90380cc8ad94e81981.dir
-      size: 10617
+      md5: ffa0579552bb620b495db1f3810065a9.dir
+      size: 6167
       nfiles: 2
     - path: models/model.pkl
       hash: md5
-      md5: 78310d92c4172b94b19fde144de0fd66
-      size: 34522
+      md5: 73421c36fd8b9b450dab68bcc41ed203
+      size: 31515
     - path: src/model/model_evaluation.py
       hash: md5
       md5: be91084ded672caa2460ef27838b624b
@@ -101,7 +101,7 @@ stages:
     outs:
     - path: reports/experiment_info.json
       hash: md5
-      md5: ef3338e8f177b0a927a02be4318fcd23
+      md5: bf9c94aed341a236f13558997308bfba
       size: 82
     - path: reports/metrics.json
       hash: md5
@@ -112,7 +112,7 @@ stages:
     deps:
     - path: reports/experiment_info.json
       hash: md5
-      md5: ef3338e8f177b0a927a02be4318fcd23
+      md5: bf9c94aed341a236f13558997308bfba
       size: 82
     - path: src/model/model_registry.py
       hash: md5

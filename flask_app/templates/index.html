@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Iris Flower Predictor</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+    }
+    .card {
+      background: #fff; width: 100%; max-width: 420px; padding: 32px;
+      border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,.2);
+    }
+    h1 { margin: 0 0 4px; font-size: 24px; color: #333; text-align: center; }
+    p.sub { margin: 0 0 24px; color: #777; text-align: center; font-size: 14px; }
+    label { display: block; margin: 12px 0 4px; font-size: 14px; color: #444; }
+    input {
+      width: 100%; padding: 10px 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 15px;
+    }
+    input:focus { outline: none; border-color: #667eea; }
+    button {
+      width: 100%; margin-top: 24px; padding: 12px; border: 0; border-radius: 8px;
+      background: #667eea; color: #fff; font-size: 16px; cursor: pointer;
+    }
+    button:hover { background: #5568d3; }
+    .result {
+      margin-top: 20px; padding: 14px; border-radius: 8px; text-align: center;
+      background: #e8f5e9; color: #2e7d32; font-size: 18px; font-weight: 600;
+    }
+    .error { background: #fdecea; color: #c62828; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Iris Flower Predictor</h1>
+    <p class="sub">Input Measurements (cm) </p>
+
+    <form method="POST" action="/predict">
+      <label for="sepal_length">Sepal Length</label>
+      <input type="number" step="any" id="sepal_length" name="sepal_length" required>
+
+      <label for="sepal_width">Sepal Width</label>
+      <input type="number" step="any" id="sepal_width" name="sepal_width" required>
+
+      <label for="petal_length">Petal Length</label>
+      <input type="number" step="any" id="petal_length" name="petal_length" required>
+
+      <label for="petal_width">Petal Width</label>
+      <input type="number" step="any" id="petal_width" name="petal_width" required>
+
+      <button type="submit">Predict</button>
+    </form>
+
+    {% if prediction %}
+      <div class="result">Species: {{ prediction }}</div>
+    {% endif %}
+    {% if error %}
+      <div class="result error">{{ error }}</div>
+    {% endif %}
+  </div>
+</body>
+</html>

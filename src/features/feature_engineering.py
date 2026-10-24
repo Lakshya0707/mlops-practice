@@ -8,10 +8,8 @@ def load_data(path: str) -> pd.DataFrame:
 def add_features(df: pd.DataFrame) -> pd.DataFrame:
     try:
         df = df.copy()
-        df['PetalArea'] = df['PetalLengthCm'] * df['PetalWidthCm']
-        df['SepalArea'] = df['SepalLengthCm'] * df['SepalWidthCm']
-        df['PetalRatio'] = df['PetalLengthCm'] / df['PetalWidthCm']
-        df['SepalRatio'] = df['SepalLengthCm'] / df['SepalWidthCm']
+        df['PetalInteraction'] = df['PetalLengthCm'] * df['PetalWidthCm']
+        df['SepalInteraction'] = df['SepalLengthCm'] * df['SepalWidthCm']
         logging.info('features added')
         return df
     except KeyError as e:
