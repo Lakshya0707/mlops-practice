@@ -218,3 +218,15 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+myvenv/
+Include/
+Lib/
+Scripts/*
+!Scripts/promote_model.py
+pyvenv.cfg
+mlops-practice/
+src.egg-info/
+__pycache__/
+logs/
+.env
+.vscode/
