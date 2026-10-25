@@ -230,3 +230,4 @@ __pycache__/
 logs/
 .env
 .vscode/
+Scripts/
