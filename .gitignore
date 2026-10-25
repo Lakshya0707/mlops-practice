@@ -231,3 +231,8 @@ logs/
 .env
 .vscode/
 Scripts/
+/data/raw
+/data/processed
+/data/interim
+/artifacts/scaler.pkl
+/models/model.pkl

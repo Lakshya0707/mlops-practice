@@ -5,7 +5,7 @@ from mlflow.tracking import MlflowClient
 from src.logger import logging
 
 mlflow.set_tracking_uri('https://dagshub.com/Lakshya0707/mlops-practice.mlflow')
-dagshub.init(repo_owner='Lakshya0707', repo_name='mlops-practice', mlflow=True)
+# dagshub.init(repo_owner='Lakshya0707', repo_name='mlops-practice', mlflow=True)
 
 def load_info(path='reports/experiment_info.json') -> dict:
     with open(path) as f:
