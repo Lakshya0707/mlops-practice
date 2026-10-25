@@ -8,6 +8,7 @@ import dagshub
 from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score
 from src.logger import logging
 
+mlflow.set_tracking_uri('https://dagshub.com/Lakshya0707/mlops-practice.mlflow')
 dagshub.init(repo_owner='Lakshya0707', repo_name='mlops-practice', mlflow=True)
 mlflow.set_experiment('iris-experiment-v2')
 
