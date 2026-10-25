@@ -3,7 +3,7 @@ import sys
 import unittest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'flask_app'))
-from app import app
+from flask_app import app
 
 
 class FlaskAppTests(unittest.TestCase):

@@ -7,7 +7,7 @@ import pandas as pd
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'flask_app'))
-from preprocessing_utility import preprocess, LABELS
+from flask_app.preprocessing_utility import preprocess, LABELS
 
 
 class TestModelLoading(unittest.TestCase):
